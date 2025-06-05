@@ -11,7 +11,7 @@
     </div>
 
     <Container :data="data" />
-
+    <button @click="more(count)">더보기</button>
     <div class="footer">
       <ul class="footer-button-plus">
         <input type="file" id="file" class="inputfile" />
@@ -24,6 +24,7 @@
 <script>
 import Container from './Container.vue'
 import data from '@/assets/data'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -31,7 +32,16 @@ export default {
   data() {
     return {
       data,
+      count: 0,
     }
+  },
+  methods: {
+    more() {
+      axios.get(`https://codingapple1.github.io/vue/more${this.count}.json`).then((result) => {
+        this.data.push(result.data)
+        this.count++
+      })
+    },
   },
 }
 </script>
