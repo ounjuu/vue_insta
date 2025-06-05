@@ -1,8 +1,6 @@
 <template>
   <div>
-    <Post />
-    <Post />
-    <Post />
+    <Post v-for="(insta, index) in data" :key="index" :insta="insta" />
   </div>
 </template>
 
@@ -12,5 +10,6 @@ import Post from './Post.vue'
 export default {
   name: 'Container',
   components: { Post: Post },
+  props: ['data'],
 }
 </script>
