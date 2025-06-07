@@ -10,7 +10,7 @@
       <img src="../src/assets/logo.svg" class="logo" />
     </div>
 
-    <Container :data="data" />
+    <Container :data="data" :page="page" />
     <button @click="more(count)">더보기</button>
     <div class="footer">
       <ul class="footer-button-plus">
@@ -19,6 +19,19 @@
       </ul>
     </div>
   </div>
+
+  <!-- 탭 테스트-->
+  <!-- <div v-bind:class="[page === 0 ? 'see' : 'none']">내용0</div>
+  <div v-bind:class="[page === 1 ? 'see' : 'none']">내용1</div>
+  <div v-bind:class="[page === 2 ? 'see' : 'none']">내용2</div> -->
+
+  <!-- <div v-if="page === 0">내용0</div>
+  <div v-if="page === 1">내용1</div>
+  <div v-if="page === 2">내용2</div>
+  <button @click="pageBtn(0)">버튼0</button>
+  <button @click="pageBtn(1)">버튼1</button>
+  <button @click="pageBtn(2)">버튼2</button>
+  <div style="margin-top: 500px"></div> -->
 </template>
 
 <script>
@@ -33,6 +46,7 @@ export default {
     return {
       data,
       count: 0,
+      page: 0,
     }
   },
   methods: {
@@ -41,6 +55,9 @@ export default {
         this.data.push(result.data)
         this.count++
       })
+    },
+    pageBtn(a) {
+      this.page = a
     },
   },
 }
@@ -54,6 +71,12 @@ ul {
   padding: 5px;
   list-style-type: none;
 }
+/* .none {
+  display: none;
+}
+.see {
+  display: block;
+} */
 .logo {
   width: 22px;
   margin: auto;
