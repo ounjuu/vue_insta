@@ -8,6 +8,7 @@
       class="post-body"
       :class="insta.filter"
       :style="{ backgroundImage: 'url(' + insta.postImage + ')' }"
+      @click="$store.commit('toggleLikes', insta.id)"
     ></div>
     <div class="post-content">
       <p>{{ insta.likes }} Likes</p>

@@ -11,6 +11,14 @@
       <img src="../src/assets/logo.svg" class="logo" />
     </div>
 
+    <h4>{{ $store.state.name }}</h4>
+    <button @click="$store.commit('changeName')">버튼</button>
+    <h4>{{ $store.state.age }}</h4>
+    <button @click="$store.commit('plusAge', 10)">버튼</button>
+
+    <!-- 이렇게 하면 안됨 -->
+    <!-- <button @click="$store.state.name = '박'">버튼</button> -->
+
     <Container :data="data" :page="page" :imageUrl="imageUrl" @write="write = $event" />
 
     <button @click="more(count)">더보기</button>
