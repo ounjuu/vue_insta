@@ -5,16 +5,18 @@
         <li>Cancel</li>
       </ul>
       <ul class="header-button-right">
-        <li>Next</li>
+        <li v-if="page == 1" @click="page++">Next</li>
+        <li v-if="page == 2" @click="publish">Save</li>
       </ul>
       <img src="../src/assets/logo.svg" class="logo" />
     </div>
 
-    <Container :data="data" :page="page" />
+    <Container :data="data" :page="page" :imageUrl="imageUrl" @write="write = $event" />
+
     <button @click="more(count)">더보기</button>
     <div class="footer">
       <ul class="footer-button-plus">
-        <input type="file" id="file" class="inputfile" />
+        <input @change="upload" accept="image/*" type="file" id="file" class="inputfile" />
         <label for="file" class="input-plus">+</label>
       </ul>
     </div>
@@ -47,6 +49,8 @@ export default {
       data,
       count: 0,
       page: 0,
+      imageUrl: '',
+      write: '',
     }
   },
   methods: {
@@ -58,6 +62,29 @@ export default {
     },
     pageBtn(a) {
       this.page = a
+    },
+    upload(e) {
+      let fileTest = e.target.files
+      let url = URL.createObjectURL(fileTest[0])
+      this.imageUrl = url
+      this.page++
+    },
+    publish() {
+      let myPosts = {
+        name: 'Kim Hyun',
+        userImage: 'https://picsum.photos/100?random=3',
+        postImage: this.imageUrl,
+        likes: 36,
+        date: 'May 15',
+        liked: false,
+        content: this.write,
+        filter: 'perpetua',
+      }
+      this.data.unshift(myPosts)
+      this.page = 0
+    },
+    handleWrite(content) {
+      this.write = content
     },
   },
 }
