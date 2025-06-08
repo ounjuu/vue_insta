@@ -16,6 +16,8 @@
     <h4>{{ $store.state.age }}</h4>
     <button @click="$store.commit('plusAge', 10)">버튼</button>
 
+    <p>{{ $store.state.more }}</p>
+    <button @click="$store.dispatch('getPosts')">더보기 버튼</button>
     <!-- 이렇게 하면 안됨 -->
     <!-- <button @click="$store.state.name = '박'">버튼</button> -->
 

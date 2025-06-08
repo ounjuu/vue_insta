@@ -6,12 +6,14 @@ import App from './App.vue'
 
 import router from './router'
 import mitt from 'mitt'
+import axios from 'axios'
+
 let emitter = mitt()
 
 const app = createApp(App)
 // 전역
 app.config.globalProperties.emitter = emitter
-// app.config.globalProperties.axios = axios
+app.config.globalProperties.axios = axios
 
 import store from './store.js'
 
