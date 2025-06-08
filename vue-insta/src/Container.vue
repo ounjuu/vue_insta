@@ -5,19 +5,24 @@
 
   <!-- 필터선택페이지 -->
   <div v-if="page === 1">
-    <div class="upload-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
+    <div
+      :class="['upload-image', selectedFilter]"
+      :style="{ backgroundImage: `url(${imageUrl})` }"
+    ></div>
     <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <FilterBox :imageUrl="imageUrl" v-for="filter in filterData" :key="filter" :filter="filter">{{
+        filter
+      }}</FilterBox>
     </div>
   </div>
 
   <!-- 글작성페이지 -->
   <div v-if="page === 2">
-    <div class="upload-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
+    <div
+      :class="selectedFilter"
+      class="upload-image"
+      :style="{ backgroundImage: `url(${imageUrl})` }"
+    ></div>
     <div class="write">
       <textarea
         class="write-box"
@@ -30,11 +35,24 @@
 
 <script>
 import Post from './Post.vue'
+import FilterBox from './FilterBox.vue'
+import filterData from '@/assets/filterData'
 
 export default {
   name: 'Container',
-  components: { Post: Post },
+  components: { Post: Post, FilterBox },
   props: ['data', 'page', 'imageUrl'],
+  data() {
+    return {
+      filterData,
+      selectedFilter: '',
+    }
+  },
+  mounted() {
+    this.emitter.on('filterName', (a) => {
+      this.selectedFilter = a
+    })
+  },
 }
 </script>
 

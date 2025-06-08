@@ -40,6 +40,7 @@
 import Container from './Container.vue'
 import data from '@/assets/data'
 import axios from 'axios'
+import filterData from '@/assets/filterData'
 
 export default {
   name: 'App',
@@ -51,6 +52,8 @@ export default {
       page: 0,
       imageUrl: '',
       write: '',
+      selectedFilter: '',
+      filterData,
     }
   },
   methods: {
@@ -70,6 +73,7 @@ export default {
       this.page++
     },
     publish() {
+      console.log(this.selectedFilter, 'esle?')
       let myPosts = {
         name: 'Kim Hyun',
         userImage: 'https://picsum.photos/100?random=3',
@@ -78,7 +82,7 @@ export default {
         date: 'May 15',
         liked: false,
         content: this.write,
-        filter: 'perpetua',
+        filter: this.selectedFilter,
       }
       this.data.unshift(myPosts)
       this.page = 0
@@ -86,6 +90,11 @@ export default {
     handleWrite(content) {
       this.write = content
     },
+  },
+  mounted() {
+    this.emitter.on('filterName', (a) => {
+      this.selectedFilter = a
+    })
   },
 }
 </script>

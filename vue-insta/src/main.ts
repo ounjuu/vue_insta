@@ -5,8 +5,13 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import mitt from 'mitt'
+let emitter = mitt()
 
 const app = createApp(App)
+// 전역
+app.config.globalProperties.emitter = emitter
+// app.config.globalProperties.axios = axios
 
 app.use(createPinia())
 app.use(router)
