@@ -33,7 +33,7 @@
   </div>
 
   <div v-if="page === 3">
-    <MyPage />
+    <MyPage :one="1" />
   </div>
 </template>
 
