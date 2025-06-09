@@ -31,16 +31,21 @@
       ></textarea>
     </div>
   </div>
+
+  <div v-if="page === 3">
+    <MyPage />
+  </div>
 </template>
 
 <script>
 import Post from './Post.vue'
 import FilterBox from './FilterBox.vue'
 import filterData from '@/assets/filterData'
+import MyPage from './MyPage.vue'
 
 export default {
   name: 'Container',
-  components: { Post: Post, FilterBox },
+  components: { Post: Post, FilterBox, MyPage },
   props: ['data', 'page', 'imageUrl'],
   data() {
     return {

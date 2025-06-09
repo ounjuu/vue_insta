@@ -66,7 +66,7 @@ export default {
     return {
       data,
       count: 0,
-      page: 0,
+      page: 3,
       imageUrl: '',
       write: '',
       selectedFilter: '',
