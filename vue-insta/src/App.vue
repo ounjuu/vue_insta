@@ -21,6 +21,12 @@
     <!-- 이렇게 하면 안됨 -->
     <!-- <button @click="$store.state.name = '박'">버튼</button> -->
 
+    <!-- computed test -->
+    <!-- <p>{{ now2 }} {{ newDate }}</p>
+    <button @click="newDate++">날짜</button> -->
+
+    <p>{{ name }} {{ age }}</p>
+
     <Container :data="data" :page="page" :imageUrl="imageUrl" @write="write = $event" />
 
     <button @click="more(count)">더보기</button>
@@ -51,6 +57,7 @@ import Container from './Container.vue'
 import data from '@/assets/data'
 import axios from 'axios'
 import filterData from '@/assets/filterData'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'App',
@@ -64,9 +71,23 @@ export default {
       write: '',
       selectedFilter: '',
       filterData,
+      // newDate: 0,
     }
   },
+  computed: {
+    // now2() {
+    //   return new Date()
+    // },
+    name() {
+      return this.$store.state.name
+    },
+    ...mapState(['name', 'age']),
+  },
   methods: {
+    ...mapMutations(['setMore']),
+    now() {
+      return new Date()
+    },
     more() {
       axios.get(`https://codingapple1.github.io/vue/more${this.count}.json`).then((result) => {
         this.data.push(result.data)
